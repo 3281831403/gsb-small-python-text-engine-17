@@ -39,8 +39,8 @@ def GetContentsDisplay(content_list):
             counts[content] = 0
         counts[content] += 1
     output = []
-    for n, c in counts.iteritems():
+    # Sort by name so the display is deterministic and does not depend on
+    # the traversal order of the counts dict.
+    for n, c in sorted(counts.items()):
         output.append((n, c))
-    output.sort(key=lambda x: x[0])
     return ["%dx%s" % (c, n) for n, c in output]
-
