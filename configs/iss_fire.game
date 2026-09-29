@@ -1,0 +1,137 @@
+[GAME]
+# Each config line is ended by a newline (\n) character.
+# '#' Is a comment.  Anything which appears on a line after '#' is ignored.
+# ':' is special character to differentiate items on a line.
+name:ISS Fire
+
+exposition:Welcome SpaceX Re-supply Robot to the International Space Station!  Unfortunatley, there is a fire on the station.  All the astronauts have evacuated; the station is abandond.  I can help you save the station, but you need to move around and put out the fires.
+
+help:I only understand a limited set of commands.  The flight manifest says you are capable of moving in the 4 cardinal directions, inspecting the situation, and picking up, putting down, and using items.  Maybe try some of those?
+
+# Capcity must come before inventory list.
+player_inventory_capacity:10
+# A colon-separated list of items in the player's posession at the start.
+player_inventory:foam:foam:foam:co2:co2
+[ROOM_STATES]
+# Each room state is described by an ID, then a colon-separated series of
+# adjectives.
+0:fine
+1:electrical fire 
+2:fabric fire
+3:electrical fire:fabric fire
+
+[ITEMS]
+# Each item is represented by it's name, and a colon-separate list of values of
+# what state transitions it is able to effect as a series of N>M values where
+# N is the current state, M is the end state.
+foam:2>1:1>0
+co2:3>1:2>0
+
+[MAP]
+# The map is defined as a series of rooms which exist in the height-by-width
+# grid.  Each entry is of the form:
+#   <Y-coordinate>:<X-coordinate>:<initial state>:<items>
+# where <items> is a colon-separated list of items.
+# All unspecified coordinates will be inaccessible parts of the map.  There are
+# no checks to see if the rooms are contiguous.
+# This map:
+#    0123456789
+#   +----------+
+#  0|    00    |
+#  1|  003300  |
+#  2|    12    |
+#  3|    0     |
+#  4| 03321 0  |
+#  5|00  010000|
+#  6|     0    |
+#  7|    33    |
+#  8|    0     |
+#  9|    10    |
+#   +----------+
+dimensions:10:10
+# Starting location is defined as Y-coordinate:X-coordinate
+player_start:0:4
+
+0:4:0:foam:co2:co2:co2
+0:5:0:foam:foam:foam
+1:2:0:
+1:3:0:
+1:4:3:
+1:5:3:
+1:6:0:
+1:7:0:foam:foam:foam:foam:co2:co2:co2:co2:co2
+2:4:1:
+2:5:2:
+3:4:0:
+4:1:0:foam:foam:foam:foam:co2:co2:co2:co2:co2
+4:2:3:
+4:3:3:
+4:4:2:
+4:5:1:
+4:7:0:foam:foam:foam:foam:foam:co2:co2:co2:co2:co2:co2:co2
+5:0:0:foam:foam:foam:foam:foam:co2:co2:co2:co2:co2:co2:co2
+5:1:0:
+5:4:0:
+5:5:1:
+5:6:0:
+5:7:0:
+5:8:0:
+5:9:0:
+6:5:0:
+7:4:3:
+7:5:3:
+8:4:0:
+9:4:1:
+9:5:0:
+
+[ALIASES_MOVE]
+go
+move
+run
+jump
+
+[ALIASES_UP]
+up
+forward
+north
+bow
+
+[ALIASES_DOWN]
+stern
+south
+down
+back
+
+[ALIASES_LEFT]
+port
+left
+counter-clockwise
+
+[ALIASES_RIGHT]
+right
+starboard
+clockwise
+
+[ALIASES_USE]
+use
+try
+
+[ALIASES_ADD]
+add
+grab
+store
+hoard
+get
+take
+
+[ALIASES_DROP]
+drop
+discard
+toss
+
+[ALIASES_INSPECT]
+look
+inspect
+examine
+wtf
+cry
